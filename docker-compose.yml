@@ -1,34 +1,44 @@
+
 version: '3'
 services:
   app:
-    image: 'jc21/nginx-proxy-manager:latest'
+    image: 'vinhmh98/nginx-proxy-manager:latest'
     ports:
-      - '80:80'
+      - '880:80'
       - '81:81'
-      - '443:443'
+      - '4443:443'
+      # Public HTTPS Port:
     environment:
+      # These are the settings to access your db
       DB_MYSQL_HOST: "db"
       DB_MYSQL_PORT: 3306
       DB_MYSQL_USER: "npm"
       DB_MYSQL_PASSWORD: "npm"
       DB_MYSQL_NAME: "npm"
+      # If you would rather use Sqlite uncomment this
+      # and remove all DB_MYSQL_* lines above
+      # DB_SQLITE_FILE: "/data/database.sqlite"
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
     volumes:
       - ./data:/data
       - ./letsencrypt:/etc/letsencrypt
+#      - ./config/nginx.conf:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - db
     networks:
-      - boutique-stack_default
+      - pilot_default
   db:
-    image: 'jc21/mariadb-aria:latest'
+    image: jc21/mariadb-aria:10.4
     environment:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
       MYSQL_USER: 'npm'
       MYSQL_PASSWORD: 'npm'
     volumes:
-      - ./data/mysql:/var/lib/mysql
-    networks:
-      - boutique-stack_default
+      - ./mysql:/var/lib/mysql
+    networks: 
+      - pilot_default
 networks:
-  boutique-stack_default:
+  pilot_default:
     external: true
-    driver: overlay
