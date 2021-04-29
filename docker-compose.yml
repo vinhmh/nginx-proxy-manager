@@ -4,9 +4,9 @@ services:
   app:
     image: 'vinhmh98/nginx-proxy-manager:latest'
     ports:
-      - '880:80'
+      - '80:80'
       - '81:81'
-      - '4443:443'
+      - '443:443'
       # Public HTTPS Port:
     environment:
       # These are the settings to access your db
