@@ -26,8 +26,6 @@ services:
 #      - ./config/nginx.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - db
-    networks:
-      - pilot_default
   db:
     image: jc21/mariadb-aria:10.4
     environment:
@@ -37,8 +35,4 @@ services:
       MYSQL_PASSWORD: 'npm'
     volumes:
       - ./mysql:/var/lib/mysql
-    networks: 
-      - pilot_default
-networks:
-  pilot_default:
-    external: true
+
