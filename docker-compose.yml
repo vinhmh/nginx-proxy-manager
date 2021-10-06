@@ -1,5 +1,9 @@
-
-version: '3'
+version: '3.1'
+networks:
+  naustok_wp:
+    external: true
+    driver: overlay
+    
 services:
   app:
     image: 'jc21/nginx-proxy-manager:latest'
@@ -26,6 +30,8 @@ services:
 #      - ./config/nginx.conf:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - db
+    networks:
+      - opentechiz
   db:
     image: jc21/mariadb-aria:10.4
     environment:
@@ -35,4 +41,6 @@ services:
       MYSQL_PASSWORD: 'npm'
     volumes:
       - ./mysql:/var/lib/mysql
+    networks:
+      - opentechiz
 
