@@ -1,6 +1,6 @@
 version: '3.1'
 networks:
-  naustok_wp:
+  opentechiz:
     external: true
     driver: overlay
     
