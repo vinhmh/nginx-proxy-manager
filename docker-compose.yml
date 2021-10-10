@@ -10,7 +10,7 @@ services:
     ports:
       - '80:80'
       - '81:81'
-      - '4443:443'
+      - '443:443'
       # Public HTTPS Port:
     environment:
       # These are the settings to access your db
@@ -33,7 +33,7 @@ services:
     networks:
       - opentechiz
   db:
-    image: jc21/mariadb-aria:10.4
+    image: jc21/mariadb-aria
     environment:
       MYSQL_ROOT_PASSWORD: 'npm'
       MYSQL_DATABASE: 'npm'
