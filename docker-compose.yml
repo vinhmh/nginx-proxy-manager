@@ -1,6 +1,6 @@
 version: '3.1'
 networks:
-  opentechiz:
+  auctionbid:
     external: true
     driver: overlay
     
@@ -31,7 +31,7 @@ services:
     depends_on:
       - db
     networks:
-      - opentechiz
+      - auctionbid
   db:
     image: jc21/mariadb-aria
     environment:
@@ -42,5 +42,5 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
     networks:
-      - opentechiz
+      - auctionbid
 
